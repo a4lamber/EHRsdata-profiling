@@ -15,8 +15,8 @@ This is a draft version of data profiling tool designed to analyze electronic he
 To get started with this tool, you will need to have access to a dataset of electronic health records. You will also need to have Python 3 installed on your machine.
 
 1. Clone this repository to your local machine.
-2. Install the required Python packages using `pip install -r requirements.txt`.
-3. Open `data_profiling_tool.py` and update the file path to your EHR dataset.
+2. Install the required Python packages using `pip install -r requirements.txt`. (using conda for environment management)
+3. Open `data_profiling_tool.py` and update the file path to your EHR dataset. 
 4. Run the tool using `python data_profiling_tool.py`.
 
 ## Contributing
