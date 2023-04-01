@@ -6,7 +6,8 @@ Table of contents:
 - [Overview](#overview)
   - [Methodology](#methodology)
     - [scalars](#scalars)
-    - [distribution](#distribution)
+    - [Distribution](#distribution)
+    - [Patterns](#patterns)
 
 
 
@@ -80,6 +81,34 @@ $$
 where $num_{non-missing}$ is the number of non-missing values in that column
 
 
-### distribution
+### Distribution
 
-It is valuable to see the type of 
+It is valuable to see the distribution of the dataset for 
+- categorical
+- numerical
+
+
+### Patterns
+
+Identification of pattern is an integral part of the data profiling. Some most common ones are:
+- Minimal Description Length for Potter wheel tool
+- the ReLIE search algorithm
+- An alphanumeric pattern profiling
+
+For the alphanumeric pattern profiling, it's kinda confusing to me since it is like
+```bash
+a0.-/+!*]\`~
+```
+
+I don's understand any of these flags but i will list it exhausively
+
+|symbol|description|
+|-|-|
+|a|there exists alphanumerical (case insensitive)|
+|0|exists a numerical values from 0-9|
+|-|-|
+|-|-|
+
+
+For the purpose of this, i am just going to examine whether a string contains digits (0-9) or contains alphavet(a-zA-Z) 
+
