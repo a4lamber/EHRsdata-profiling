@@ -5,7 +5,8 @@ Table of contents:
 - [Data visualization Visualization](#data-visualization-visualization)
 - [Overview](#overview)
   - [Methodology](#methodology)
-  - [scalars](#scalars)
+    - [scalars](#scalars)
+    - [distribution](#distribution)
 
 
 
@@ -15,6 +16,21 @@ Data profiling is a way to have a first taste of what the data might look like. 
 
 Therefore, this project is to design a data profiling tool to better understand what the data might look like.
 
+You could subcategorize the data based on their characteristics statistically
+```mermaid
+flowchart TD
+a("data types") --> categorical & numerical
+categorical --> nominal & ordinal
+numerical --> interval & ratio 
+```
+You could describe those data with primitive data structure:
+- for numerical: int, float long etc
+- for categorical: string
+
+
+
+
+
 ## Methodology
 
 The method we will take is following the methodology shown in the figure below
@@ -22,10 +38,11 @@ The method we will take is following the methodology shown in the figure below
 ```mermaid
 flowchart TD
 a("data profiling") --> b("scalars") & c("distributions") & d("patterns")
+b --> null & uniqueness
 ```
 
 
-## scalars
+### scalars
 
 For scalars, we are mainly going to focus on
 - a measure of missing values (% of missing values)
@@ -61,3 +78,8 @@ Uniqueness = \frac{num_{dis}-1}{num_{non-missing}-1}
 \end{align}
 $$
 where $num_{non-missing}$ is the number of non-missing values in that column
+
+
+### distribution
+
+It is valuable to see the type of 
