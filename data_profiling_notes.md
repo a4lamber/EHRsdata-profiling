@@ -4,6 +4,7 @@
 Table of contents:
 - [Data visualization Visualization](#data-visualization-visualization)
 - [Overview](#overview)
+  - [Pre-req](#pre-req)
   - [Methodology](#methodology)
     - [scalars](#scalars)
     - [Distribution](#distribution)
@@ -13,9 +14,13 @@ Table of contents:
 
 # Overview
 
-Data profiling is a way to have a first taste of what the data might look like. It is useful since it will inform us what the raw data is like so we could design our filtering and processing functions for those raw data better.
+Data profiling is a way to have a first taste of what the data might look like. It is useful since it will inform us what the raw data is like so we could design our filtering and processing functions for those raw data better. Traditionally, data profiling is typically done with textutally. As the number of files increases, the textual solution becomes less clear. On the other hand, visual solution appears to be one of the solution to represent and profile the data better. Therefore, this project is to design a data profiling tool to better understand what the data might look like.
 
-Therefore, this project is to design a data profiling tool to better understand what the data might look like.
+## Pre-req
+
+There are two ways to categorize data, and these are
+- statistically categorization
+- data structure
 
 You could subcategorize the data based on their characteristics statistically
 ```mermaid
@@ -24,10 +29,9 @@ a("data types") --> categorical & numerical
 categorical --> nominal & ordinal
 numerical --> interval & ratio 
 ```
-You could describe those data with primitive data structure:
-- for numerical: int, float long etc
-- for categorical: string
-
+At the end of the day, you need to store them somehow on your computer. It is implying the data strcture and some of common data structure encoutered in the world of data are:
+- primitive data structure: int, float, bool, string
+- others: datetime
 
 
 
@@ -39,7 +43,27 @@ The method we will take is following the methodology shown in the figure below
 ```mermaid
 flowchart TD
 a("data profiling") --> b("scalars") & c("distributions") & d("patterns")
+
+subgraph bar chart
+null
+uniqueness
+end
+
+subgraph box plot
+categorical
+numerical
+end
+
+subgraph heatmap
+regex
+end
+
 b --> null & uniqueness
+c --> categorical & numerical
+d --> regex
+
+categorical --> h("variable length of string")
+numerical --> i("value distribution")
 ```
 
 

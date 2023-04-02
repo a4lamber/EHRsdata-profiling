@@ -1,6 +1,11 @@
 # EHR Data Profiling Tool
 
-This is a draft version of data profiling tool designed to analyze electronic health record (EHR) data and It provides insights into data quality and completeness, and helps identify areas for improvement. It will also facilitate the development of filtering and cleaning scripts for health dataset.
+This repo is a tool for performing data profiling, visually. Since i believe visual inspection is always more appealing than representing textually. The current feagure is available
+
+![](assets/Dash-1.jpg)
+![](assets/Dash-2.jpg)
+
+
 
 ## Features
 
@@ -10,14 +15,13 @@ This is a draft version of data profiling tool designed to analyze electronic he
 - **Data completeness assessment:** Calculates data completeness percentages for each field in the EHR dataset and identifies fields with low completion rates.
 - **Data field distribution analysis:** Provides visualizations and statistics to help users understand the distribution of values in each field.
 
+This project is built with `Python3` and `Plotty dash` framework.
+
 ## Getting Started
 
-To get started with this tool, you will need to have access to a dataset of electronic health records. You will also need to have Python 3 installed on your machine.
+To get started with this tool, you will need to have access to a dataset of electronic health records (EHRs) available on [PhysioNet](https://physionet.org/content/mimiciii-demo/1.4/). 
 
-1. Clone this repository to your local machine.
-2. Install the required Python packages using `pip install -r requirements.txt`. (using conda for environment management)
-3. Open `data_profiling_tool.py` and update the file path to your EHR dataset. 
-4. Run the tool using `python data_profiling_tool.py`.
+For this project, you need `python3` o  
 
 ## Contributing
 
