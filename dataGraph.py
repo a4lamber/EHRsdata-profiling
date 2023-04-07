@@ -5,7 +5,7 @@
  # @ Modified time: 2023-04-01 21:46:52
  # @ Description: integrate multiple plotly graph together into dash framework.
  '''
- 
+
 
 import os
 import pathlib
