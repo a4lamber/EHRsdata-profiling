@@ -40,75 +40,6 @@ df = pd.read_csv(files[0])
 
 
 """
-distribution: categorical variables
-"""
-numerical_columns,cate_columns = get_num_cat_dtype(df)
-cat_plot = get_categorical_distribution(df,cate_columns)
-
-
-fig3 = go.Figure()
-
-# Use x instead of y argument for horizontal plot
-
-for i in range(len(cate_columns)):
-      fig3.add_trace(go.Box(x=df[cate_columns].applymap(str).applymap(len).iloc[:,i],
-                        name = cate_columns[i]
-                        ),
-                  )
-
-fig3.update_layout(
-                  title_text=r"categorical value distribution",
-                  title_font_size=20
-                  )
-
-"""
-distribution: numerical variables
-"""
-
-fig4 = go.Figure()
-
-# Use x instead of y argument for horizontal plot
-
-for i in range(len(numerical_columns)):
-    curr_column = df[numerical_columns].iloc[:,i]
-    fig4.add_trace(go.Box(x=curr_column/curr_column.max(),
-                        name = numerical_columns[i]
-                        ),
-                  )
-
-fig4.update_layout(
-                  title_text=r"numerical value distribution",
-                  title_font_size=20,
-                  xaxis_tickformat = ',.1%'
-                  )
-
-"""
-pattern: boolean flag for regex 
-"""
-
-df_pattern = get_pattern(df)
-
-fig5 = go.Figure()
-
-fig5.add_trace(go.Heatmap(
-                   z=df_pattern.to_numpy().astype(dtype=int),
-                   x=["0","a","A"],
-                   y=list(df_pattern.index),
-                   hoverongaps = False,
-                   showlegend=True,
-                   colorscale = 'Greys',
-                   name = ""
-                   ),)
-# did some trick to set block size to be same
-fig5.update_layout(
-                  title_text=r"pattern",
-                  title_font_size=20,
-                  xaxis = dict(
-                      side = "top"
-                  )
-                  )
-
-"""
 Dash layout tuning
 """
 
@@ -128,7 +59,7 @@ app.layout = html.Div(children=[
       dcc.Dropdown(
          id='dropdown',
          options = [
-            {'label':i,'value':i} for i in [file for file in files]
+            {'label': html.Span([i], style={'color':'Black','font-size':20}),'value':i} for i in [file for file in files]
          ]
       ),
    ]),
@@ -182,8 +113,9 @@ app.layout = html.Div(children=[
    ]),
 ])
 
+
 # ----------------------------------------------------------------------------------
-# Function callback for all the graph
+# Function callback for all the graphs
 
 @app.callback(
    # callback for fig 1
@@ -194,31 +126,40 @@ app.layout = html.Div(children=[
 
 def update_fig1(value):
    """
-   update % of null
+   callback for the graph 123
+   Args:
+       value (_type_): _description_
+
+   Returns:
+       _type_: _description_
    """
-   df = pd.read_csv(value)
+   
+   if value is not None:
+      df = pd.read_csv(value)
 
-   percentage_of_null = list(df.isnull().sum()/len(df.index))
+      percentage_of_null = list(df.isnull().sum()/len(df.index))
 
-   fig1 = go.Figure()
-   fig1.add_trace(go.Bar(
-      y=df.columns,
-      x=percentage_of_null,
-      name=r'% of null',
-      orientation='h',
-      marker=dict(
-         color='rgba(246, 78, 139, 0.6)',
-         line=dict(color='rgba(246, 78, 139, 1.0)', width=3)
-      ),
-      showlegend=True
-   ))
+      fig1 = go.Figure()
+      fig1.add_trace(go.Bar(
+         y=df.columns,
+         x=percentage_of_null,
+         name=r'% of null',
+         orientation='h',
+         marker=dict(
+            color='rgba(246, 78, 139, 0.6)',
+            line=dict(color='rgba(246, 78, 139, 1.0)', width=3)
+         ),
+         showlegend=True
+      ))
 
-   fig1.update_layout(
-                     title_text=r"% of null",
-                     title_font_size=20,
-                     xaxis_tickformat = ',.1%'
-                     )
-   return fig1
+      fig1.update_layout(
+                        title_text=r"% of null",
+                        title_font_size=20,
+                        xaxis_tickformat = ',.1%'
+                        )
+      return fig1
+   else:
+      return {}
 
 
 @app.callback(
@@ -233,31 +174,33 @@ def update_fig2(value):
    Args:
        value (_type_): _description_
    """
-   df = pd.read_csv(value)
-   
-   uniqueness = (df.nunique() - 1)/(len(df.index) - df.isnull().sum() - 1)
+   if value is not None:
+      df = pd.read_csv(value)
+      
+      uniqueness = (df.nunique() - 1)/(len(df.index) - df.isnull().sum() - 1)
 
-   fig2 = go.Figure()
-   fig2.add_trace(go.Bar(
-      y=df.columns,
-      x=uniqueness,
-      name=r'uniquiness',
-      orientation='h',
-      marker=dict(
-         color='rgba(246, 78, 139, 0.6)',
-         line=dict(color='rgba(246, 78, 139, 1.0)', width=3)
-      ),
-      showlegend=True
-   ))
+      fig2 = go.Figure()
+      fig2.add_trace(go.Bar(
+         y=df.columns,
+         x=uniqueness,
+         name=r'uniquiness',
+         orientation='h',
+         marker=dict(
+            color='rgba(246, 78, 139, 0.6)',
+            line=dict(color='rgba(246, 78, 139, 1.0)', width=3)
+         ),
+         showlegend=True
+      ))
 
-   fig2.update_layout(
-                     title_text=r"uniquiness",
-                     title_font_size=20,
-                     xaxis_tickformat = ',.1%'
-                     )
+      fig2.update_layout(
+                        title_text=r"uniquiness",
+                        title_font_size=20,
+                        xaxis_tickformat = ',.1%'
+                        )
 
-   return fig2
-
+      return fig2
+   else:
+      return {}
 
 
 # ----------------------------------------------------------------------------------
@@ -273,28 +216,31 @@ def update_fig3(value):
    Args:
        value (_type_): _description_
    """
-   df = pd.read_csv(value)
-   
-   numerical_columns,cate_columns = get_num_cat_dtype(df)
-   cat_plot = get_categorical_distribution(df,cate_columns)
+   if value is not None:
+      df = pd.read_csv(value)
+      
+      numerical_columns,cate_columns = get_num_cat_dtype(df)
+      cat_plot = get_categorical_distribution(df,cate_columns)
 
 
-   fig3 = go.Figure()
+      fig3 = go.Figure()
 
-   # Use x instead of y argument for horizontal plot
+      # Use x instead of y argument for horizontal plot
 
-   for i in range(len(cate_columns)):
-         fig3.add_trace(go.Box(x=df[cate_columns].applymap(str).applymap(len).iloc[:,i],
-                           name = cate_columns[i]
-                           ),
-                     )
+      for i in range(len(cate_columns)):
+            fig3.add_trace(go.Box(x=df[cate_columns].applymap(str).applymap(len).iloc[:,i],
+                              name = cate_columns[i]
+                              ),
+                        )
 
-   fig3.update_layout(
-                     title_text=r"categorical value distribution",
-                     title_font_size=20
-                     )
+      fig3.update_layout(
+                        title_text=r"categorical value distribution",
+                        title_font_size=20
+                        )
 
-   return fig3
+      return fig3
+   else:
+      return {}
 
 
 @app.callback(
@@ -309,27 +255,30 @@ def update_fig4(value):
    Args:
        value (_type_): _description_
    """
-   df = pd.read_csv(value)
-   numerical_columns,cate_columns = get_num_cat_dtype(df)
+   if value is not None:
+      df = pd.read_csv(value)
+      numerical_columns,cate_columns = get_num_cat_dtype(df)
 
-   fig4 = go.Figure()
+      fig4 = go.Figure()
 
-   # Use x instead of y argument for horizontal plot
+      # Use x instead of y argument for horizontal plot
 
-   for i in range(len(numerical_columns)):
-      curr_column = df[numerical_columns].iloc[:,i]
-      fig4.add_trace(go.Box(x=curr_column/curr_column.max(),
-                           name = numerical_columns[i]
-                           ),
-                     )
+      for i in range(len(numerical_columns)):
+         curr_column = df[numerical_columns].iloc[:,i]
+         fig4.add_trace(go.Box(x=curr_column/curr_column.max(),
+                              name = numerical_columns[i]
+                              ),
+                        )
 
-   fig4.update_layout(
-                     title_text=r"numerical value distribution",
-                     title_font_size=20,
-                     xaxis_tickformat = ',.1%'
-                     )
+      fig4.update_layout(
+                        title_text=r"numerical value distribution",
+                        title_font_size=20,
+                        xaxis_tickformat = ',.1%'
+                        )
 
-   return fig4
+      return fig4
+   else:
+      return {}
 
 
 @app.callback(
@@ -344,30 +293,33 @@ def update_fig5(value):
    Args:
        value (_type_): _description_
    """
-   df = pd.read_csv(value)
-   df_pattern = get_pattern(df)
+   if value is not None:
+      df = pd.read_csv(value)
+      df_pattern = get_pattern(df)
 
-   fig5 = go.Figure()
+      fig5 = go.Figure()
 
-   fig5.add_trace(go.Heatmap(
-                     z=df_pattern.to_numpy().astype(dtype=int),
-                     x=["0","a","A"],
-                     y=list(df_pattern.index),
-                     hoverongaps = False,
-                     showlegend=True,
-                     colorscale = 'Greys',
-                     name = ""
-                     ),)
-   # did some trick to set block size to be same
-   fig5.update_layout(
-                     title_text=r"pattern",
-                     title_font_size=20,
-                     xaxis = dict(
-                        side = "top"
-                     )
-                     )
+      fig5.add_trace(go.Heatmap(
+                        z=df_pattern.to_numpy().astype(dtype=int),
+                        x=["0","a","A"],
+                        y=list(df_pattern.index),
+                        hoverongaps = False,
+                        showlegend=True,
+                        colorscale = 'Greys',
+                        name = ""
+                        ),)
+      # did some trick to set block size to be same
+      fig5.update_layout(
+                        title_text=r"pattern",
+                        title_font_size=20,
+                        xaxis = dict(
+                           side = "top"
+                        )
+                        )
 
-   return fig5
+      return fig5
+   else:
+      return {}
 
 
 if __name__ == '__main__':
