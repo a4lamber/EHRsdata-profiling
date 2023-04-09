@@ -10,6 +10,7 @@ Table of contents:
     - [Distribution](#distribution)
     - [Patterns](#patterns)
 - [Report](#report)
+- [data quality assessment](#data-quality-assessment)
 
 
 
@@ -141,3 +142,9 @@ For the purpose of this, i am just going to examine whether a string contains di
 # Report
 
 Besides graphical visualization of the profile, it is also recommended to have a `textual profiler` as well. It would be more straight forward to look at 
+
+
+# data quality assessment
+
+read this for a list of [data quality assessment tool](https://betterprogramming.pub/5-data-quality-tools-you-should-know-about-dacc38aa6ba8)
+

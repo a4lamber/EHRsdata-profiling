@@ -15,38 +15,30 @@ import numpy as np
 import plotly.graph_objects as go
 
 import dash
-from dash import dcc,html
-from dash.dependencies import Input, Output
+from dash import dcc,html,Output,Input
 
-import plotly.express as px
 
 # import some ad-hoc methods i wrote 
 from dataGraphProfile import get_num_cat_dtype,get_categorical_distribution,get_pattern
+from dataGraphProfileIO import find_csvs,get_report
 
 """
 Read csv files
 """
-
 path = "./rawdata"
-data = pathlib.Path(path)
-# recursively read files
-files = list(data.rglob("*.csv*"))
-# conver POSIX to string
-files = [str(file) for file in files]
-
-# select 1st file for now, need to implement a dropdown list
-df = pd.read_csv(files[0])
+files = find_csvs(path)
 
 
-
+#load data into a DataFrame object:
+df_default = pd.DataFrame({
+  "example": [1, 2, 3],
+  "value": [1, 2, 3]
+})
 """
 Dash layout tuning
 """
 
 app = dash.Dash(__name__)
-
-
-
 
 
 app.layout = html.Div(children=[
@@ -63,6 +55,15 @@ app.layout = html.Div(children=[
          ]
       ),
    ]),
+   # stat table
+   html.Div([
+      html.H1(children='Column-wise summary'),
+      dash.dash_table.DataTable(
+        id='table',
+        columns=[{'name': i, 'id': i} for i in df_default.columns],
+        data=df_default.to_dict('records')
+   )
+    ]),
    
    html.Div([
       html.H1(children='Percentage of null'),
@@ -113,8 +114,38 @@ app.layout = html.Div(children=[
    ]),
 ])
 
+##############################################################
+######################## callbacks ###########################
+##############################################################
 
-# ----------------------------------------------------------------------------------
+@app.callback(
+    dash.dependencies.Output('table', 'columns'),
+    dash.dependencies.Output('table', 'data'),
+    dash.dependencies.Input('dropdown', 'value')
+)
+
+def update_table(value):
+   """
+   function callback for summary dash table
+   Args:
+       value (_type_): _description_
+
+   Returns:
+       columns, data for dash_table
+   """
+   if value is not None: 
+      # in dropdown
+      df = get_report(value)
+      columns = [{'name': i, 'id': i} for i in df.columns]
+      data = df.to_dict('records')
+   else:
+      # when start-up
+      columns = [{'name': i, 'id': i} for i in df_default.columns]
+      data = df_default.to_dict('records')
+
+   return columns,data
+
+
 # Function callback for all the graphs
 
 @app.callback(
