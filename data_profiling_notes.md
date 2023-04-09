@@ -1,14 +1,15 @@
-# Data visualization Visualization 
+# Data profiler notes
 
 
 Table of contents:
-- [Data visualization Visualization](#data-visualization-visualization)
+- [Data profiler notes](#data-profiler-notes)
 - [Overview](#overview)
   - [Pre-req](#pre-req)
   - [Methodology](#methodology)
     - [scalars](#scalars)
     - [Distribution](#distribution)
     - [Patterns](#patterns)
+- [Report](#report)
 
 
 
@@ -136,3 +137,7 @@ I don's understand any of these flags but i will list it exhausively
 
 For the purpose of this, i am just going to examine whether a string contains digits (0-9) or contains alphavet(a-zA-Z) 
 
+
+# Report
+
+Besides graphical visualization of the profile, it is also recommended to have a `textual profiler` as well. It would be more straight forward to look at 
