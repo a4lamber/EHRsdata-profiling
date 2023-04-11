@@ -39,7 +39,7 @@ Dash layout tuning
 """
 
 app = dash.Dash(__name__)
-
+app.title = "Visual Data Profiler"
 
 app.layout = html.Div(children=[
    # a dropdown menu for selecting dataset   
