@@ -34,6 +34,9 @@ This project is built with `Python3.10` and `Plotty dash` framework.
 
 For the demo, the dataset selected is the Mimic datasets. You will need to have access to a dataset of electronic health records (EHRs) available on [PhysioNet](https://physionet.org/content/mimiciii-demo/1.4/). 
 
+Your need to put your data into your project folder `your-project/rawdata`. The code will recursive scan the `./rawdata` directory.
+
+
 Clone the repo
 ```
 git clone https://github.com/a4lamber/EHRsdata-profiling.git
@@ -49,6 +52,16 @@ source EHRsdata-profiling/env/bin/activate
 install the project dependencies with `pip`
 ```
 pip install -r requirements.txt
+```
+
+run the project
+```
+python3 app.py
+```
+
+open your fav browser and run
+```
+localhost:8050
 ```
 
 
