@@ -1,17 +1,15 @@
 # macOS
 .DS_Store
 
-
-
-
+# ignore some personal notes
 data_profiling_notes.md
-
-
 plotly_dash_example.py
-data_profiling_notes.md
 
-# 
-rawdata/
+# ignore json schema
 schema/
 meeting_notes/
+# ignore reference
 reference/
+
+# ignore test folder
+tests/
