@@ -8,8 +8,10 @@ plotly_dash_example.py
 # ignore json schema
 schema/
 meeting_notes/
+
 # ignore reference
 reference/
+rawdata/
 
 # ignore test folder
 tests/
