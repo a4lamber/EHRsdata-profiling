@@ -1,27 +1,56 @@
 # EHR Data Profiling Tool
 
-This repo is a tool for performing data profiling, visually. Since i believe visual inspection is always more appealing than representing textually. The current feagure is available
+A visual data profiler tool allows you to understand structure and content of your data using **visualization** and **statistical summaries**.
 
-![](assets/Dash-1.jpg)
-![](assets/Dash-2.jpg)
+![](assets/EHR-tool-demo.gif)
 
+
+## Motivation
+
+Current data profiling tool are mainly text-based
+- [pandas-profiling](https://pypi.org/project/pandas-profiling/)
+- [DataProfiler](https://pypi.org/project/DataProfiler/)
+
+Text-based data profile is comprehensive but not intuitive, hence it motivates me the creation of the tool.
+
+This project is built with `Python3.10` and `Plotty dash` framework.
 
 
 ## Features
 
-- **Data profiling:** Provides detailed statistics and summaries of EHR data, including missing values, duplicates, and outliers.
+- **Data profiling:** Provides detailed statistics and summaries of EHR data, including missing values, uniquiness and outliers.
 - **Data visualization:** Generates interactive graphs and visualizations to help users better understand their EHR data.
-- **Data quality assessment:** Evaluates data quality based on a set of pre-defined rules and flags any issues that require attention.
-- **Data completeness assessment:** Calculates data completeness percentages for each field in the EHR dataset and identifies fields with low completion rates.
 - **Data field distribution analysis:** Provides visualizations and statistics to help users understand the distribution of values in each field.
 
-This project is built with `Python3` and `Plotty dash` framework.
+### Supported format
+- `csv`
+- `csv.gz`
+- `dataframe` (to do)
+- `parquet` (to do)
+- `avro` (to do)
+
 
 ## Getting Started
 
-To get started with this tool, you will need to have access to a dataset of electronic health records (EHRs) available on [PhysioNet](https://physionet.org/content/mimiciii-demo/1.4/). 
+For the demo, the dataset selected is the Mimic datasets. You will need to have access to a dataset of electronic health records (EHRs) available on [PhysioNet](https://physionet.org/content/mimiciii-demo/1.4/). 
 
-For this project, you need `python3` o  
+Clone the repo
+```
+git clone https://github.com/a4lamber/EHRsdata-profiling.git
+```
+
+Create a python virtual environment with `venv`
+```bash
+python3 -v venv EHRsdata-profiling/env
+
+source EHRsdata-profiling/env/bin/activate
+```
+
+install the project dependencies with `pip`
+```
+pip install -r requirements.txt
+```
+
 
 ## Contributing
 
