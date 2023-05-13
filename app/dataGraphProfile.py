@@ -9,18 +9,13 @@
 import pandas as pd
 import numpy as np
 
+    
 def get_num_cat_dtype(input_df):
-    """
+    """_summary_
     return the two list containing columns of categorical data and numerical data
-    Args:
-        input_df (pandas dataframe): dataframe you wish to determine 
-        whether it's cateogircal or numerical
 
-    Returns:
-        numerical_col (list): a list of columnnames for numerical data 
-        categorical_col (list): a list of columnnames for categorical data 
-    Note:
-        is implemented with selected_dtypes better? revisit later
+    :param _type_ input_df: _description_
+    :return _type_: _description_
     """
     numerical_col = []
     categorical_col = []
@@ -38,20 +33,21 @@ def get_num_cat_dtype(input_df):
 
 
 def get_categorical_distribution(input_df,cat_col_list):
-    """
-    get the minimum and maximum for every column in df[[a,b,c]] and export
-    in json format
-    Args:
-        input_df (_type_): _description_
-        cat_list (_type_): a list of categorical distribution
-    Returns:
-        res (dict): a nested json containing result
-    Example:
-        output looks like
-        {'activeupondischarge': {'min': 4, 'max': 5},
+    """_summary_
+    For a column with categorical values (), get the minimum and maximum length of the string
+    for every column in df[[a,b,c]] and export in json format
+    
+    output looks like
+    {
+        'activeupondischarge': {'min': 4, 'max': 5},
         'diagnosisstring': {'min': 24, 'max': 146},
         'icd9code': {'min': 3, 'max': 35},
-        'diagnosispriority': {'min': 5, 'max': 7}}
+        'diagnosispriority': {'min': 5, 'max': 7}
+    }
+    
+    :param _type_ input_df: _description_
+    :param _type_ cat_col_list: _description_
+    :return _type_: _description_
     """
     res = {}
     
@@ -59,19 +55,18 @@ def get_categorical_distribution(input_df,cat_col_list):
         res[col] = {"min":input_df[col].apply(str).apply(len).min(),
                     "max":input_df[col].apply(str).apply(len).max()}
         
-
     return res
         
-        
+ 
 def get_pattern(input_df):
     """
-    find the patterns for this this dataset
-    Args:
-        input_df (_type_): the dataframe you wish to compute pattern
+    Finding the regex pattern for your dataframe, three types are implemented
+    for now, for numerical column, for lowercase column, for uppercase column
 
-    Returns:
-        res (dataframe): a boolean dataframe for heatmap plot
+    :param dataframe input_df: a dataframe you wish to find pattern from
+    :return dataframe: a boolean dataframe for heatmap plot
     """
+
     # define your local methods
     contains_digit = lambda x: any([char.isdigit() for char in x])
     contains_lower = lambda x: any([char.islower() for char in x])

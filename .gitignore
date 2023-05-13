@@ -15,3 +15,6 @@ rawdata/
 
 # ignore test folder
 tests/
+
+# ignore virutal env
+.venv/
