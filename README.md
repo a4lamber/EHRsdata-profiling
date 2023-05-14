@@ -37,32 +37,58 @@ For the demo, the dataset selected is the Mimic datasets. You will need to have 
 Your need to put your data into your project folder `your-project/rawdata`. The code will recursive scan the `./rawdata` directory.
 
 
+### Without Docker
+
 Clone the repo
 ```
 git clone https://github.com/a4lamber/EHRsdata-profiling.git
 ```
 
-Create a python virtual environment with `venv`
+Create a python virtual environment called `.venv`
 ```bash
-python3 -v venv EHRsdata-profiling/env
+# create a virtual environment
+python3 -v venv EHRsdata-profiling/.venv
 
-source EHRsdata-profiling/env/bin/activate
+cd EHRsdata-profiling
+
+# if you using bash
+source .venv/bin/activate
 ```
 
 install the project dependencies with `pip`
-```
+```bash
 pip install -r requirements.txt
 ```
 
 run the project
-```
-python3 app.py
+```bash
+python3 ./app/app.py
 ```
 
 open your fav browser and run
-```
+```bash
 localhost:8050
 ```
+
+### With Docker
+
+```bash
+git clone https://github.com/a4lamber/EHRsdata-profiling.git
+
+cd EHRsdata-profiling
+
+# bulid docker image in current directory
+docker build -t EHRsdata-profiling .
+```
+This will build an image with the tag `EHRsdata-profiling` based on the Dockerfile in your current directory.
+
+Finally, run the Docker container using the following command:
+```bash
+# run container
+docker container run -it -p 8050:8050 EHRsdata-profiling
+```
+This will start the container and map port 8050 in the container to port 8050 on your local machine. You can now access your Dash Plotly app by navigating to http://localhost:8050 in your web browser.
+
 
 
 ## Contributing
